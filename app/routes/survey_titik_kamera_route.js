@@ -11,5 +11,13 @@ router.post(
   '/surveys_titik_kamera',
   survey_titik_kamera_controller.create_survey_titik_kamera
 )
+router.put(
+  '/surveys_titik_kamera',
+  survey_titik_kamera_controller.update_survey_titik_kamera
+)
+router.delete(
+  '/surveys_titik_kamera',
+  survey_titik_kamera_controller.delete_survey_titik_kamera
+)
 
 module.exports = router

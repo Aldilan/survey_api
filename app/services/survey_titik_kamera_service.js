@@ -13,16 +13,46 @@ class survey_titik_kamera_service {
     )
   }
   static create_survey_titik_kamera(survey_titik_kamera_data, callback) {
-    const { id_survey, judul_titik, foto_titik } = survey_titik_kamera_data
+    const { id_survey_titik_kamera, judul_titik, foto_titik } =
+      survey_titik_kamera_data
     db_connection.query(
       'INSERT INTO `tb_survey_titik_kamera` (`Id_Survey_Titik_Kamera`, `Id_Survey`, `Judul_Titik`, `Foto_Titik`) VALUES (NULL, ?, ?, ?)',
-      [id_survey, judul_titik, foto_titik],
+      [id_survey_titik_kamera, judul_titik, foto_titik],
       (error, result) => {
         if (error) {
           return callback(error, null)
         }
         const survey_titik_kamera_id = result.insertId
         return callback(null, survey_titik_kamera_id)
+      }
+    )
+  }
+  static update_survey_titik_kamera(
+    survey_titik_kamera_id,
+    survey_titik_kamera_data,
+    callback
+  ) {
+    const { judul_titik, foto_titik } = survey_titik_kamera_data
+    db_connection.query(
+      'UPDATE `tb_survey_titik_kamera` SET `Judul_Titik` = ?, `Foto_Titik` = ? WHERE `tb_survey_titik_kamera`.`Id_Survey_Titik_Kamera` = ?',
+      [judul_titik, foto_titik, survey_titik_kamera_id],
+      (error, result) => {
+        if (error) {
+          return callback(error, null)
+        }
+        return callback(null, result.affectedRows > 0)
+      }
+    )
+  }
+  static delete_survey_titik_kamera(survey_titik_kamera_id, callback) {
+    db_connection.query(
+      'DELETE FROM `tb_survey_titik_kamera` WHERE `tb_survey_titik_kamera`.`Id_Survey_Titik_Kamera` = ?',
+      [survey_titik_kamera_id],
+      (error, result) => {
+        if (error) {
+          return callback(error, null)
+        }
+        return callback(null, result.affectedRows > 0)
       }
     )
   }

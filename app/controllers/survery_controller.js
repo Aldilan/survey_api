@@ -36,12 +36,12 @@ const update_survey = (req, res) => {
     { nama_projek, alamat, email, no_telpon, status },
     (error, success) => {
       if (error) {
-        console.error('Error updating product:', error.message)
-        res.status(500).json({ error: 'Failed to update product' })
+        console.error('Error updating survey:', error.message)
+        res.status(500).json({ error: 'Failed to update survey' })
         return
       }
       if (!success) {
-        res.status(404).json({ error: 'Product not found' })
+        res.status(404).json({ error: 'Survey not found' })
       }
       res
         .status(200)
@@ -54,10 +54,10 @@ const delete_survey = (req, res) => {
   const survey_id = req.body.survey_id
   survey_service.delete_survey(survey_id, (error, success) => {
     if (error) {
-      console.error('Error deleting product:', error.message)
+      console.error('Error deleting survey:', error.message)
     }
     if (!success) {
-      res.status(404).json({ error: 'Product not found' })
+      res.status(404).json({ error: 'Survey not found' })
     }
     res.status(204).end()
   })
