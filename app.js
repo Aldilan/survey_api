@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', require('./app/routes/survey_route'))
+app.use('/api', require('./app/routes/survey_titik_kamera_route'))
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' })
