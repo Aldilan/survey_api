@@ -11,6 +11,7 @@ app.use(cors())
 app.get('/', (req, res) => {
   res.send('Hello!')
 })
+
 app.use('/api', require('./app/routes/survey_route'))
 
 app.use((req, res) => {
