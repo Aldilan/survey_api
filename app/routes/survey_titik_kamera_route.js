@@ -8,6 +8,10 @@ router.get(
   survey_titik_kamera_controller.get_all_surveys_titik_kamera
 )
 router.post(
+  '/surveys_titik_kamera/survey',
+  survey_titik_kamera_controller.get_detail_surveys_titik_kamera
+)
+router.post(
   '/surveys_titik_kamera',
   survey_titik_kamera_controller.create_survey_titik_kamera
 )

@@ -12,6 +12,18 @@ class survey_titik_kamera_service {
       }
     )
   }
+  static get_detail_surveys_titik_kamera(survey_id, callback) {
+    db_connection.query(
+      'SELECT * FROM tb_survey_titik_kamera WHERE `tb_survey_titik_kamera`.`Id_Survey` = ?',
+      [survey_id],
+      (error, results) => {
+        if (error) {
+          return callback(error, null)
+        }
+        return callback(null, results)
+      }
+    )
+  }
   static create_survey_titik_kamera(survey_titik_kamera_data, callback) {
     const { id_survey_titik_kamera, judul_titik, foto_titik } =
       survey_titik_kamera_data

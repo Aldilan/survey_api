@@ -13,6 +13,21 @@ const get_all_surveys_titik_kamera = (req, res) => {
   )
 }
 
+const get_detail_surveys_titik_kamera = (req, res) => {
+  const survey_id = req.body.survey_id
+  survey_titik_kamera_service.get_detail_surveys_titik_kamera(
+    survey_id,
+    (error, surverys) => {
+      if (error) {
+        console.error('Error getting surveys:', error.message)
+        res.status(500).json({ error: 'Failed to get surveys' })
+        return
+      }
+      res.status(200).json(surverys)
+    }
+  )
+}
+
 const create_survey_titik_kamera = (req, res) => {
   const { id_survey, judul_titik, foto_titik } = req.body
   survey_titik_kamera_service.create_survey_titik_kamera(
@@ -73,6 +88,7 @@ const delete_survey_titik_kamera = (req, res) => {
 
 module.exports = {
   get_all_surveys_titik_kamera,
+  get_detail_surveys_titik_kamera,
   create_survey_titik_kamera,
   update_survey_titik_kamera,
   delete_survey_titik_kamera,
