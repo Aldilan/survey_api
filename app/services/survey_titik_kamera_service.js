@@ -25,11 +25,10 @@ class survey_titik_kamera_service {
     )
   }
   static create_survey_titik_kamera(survey_titik_kamera_data, callback) {
-    const { id_survey_titik_kamera, judul_titik, foto_titik } =
-      survey_titik_kamera_data
+    const { id_survey, judul_titik, foto_titik } = survey_titik_kamera_data
     db_connection.query(
       'INSERT INTO `tb_survey_titik_kamera` (`Id_Survey_Titik_Kamera`, `Id_Survey`, `Judul_Titik`, `Foto_Titik`) VALUES (NULL, ?, ?, ?)',
-      [id_survey_titik_kamera, judul_titik, foto_titik],
+      [id_survey, judul_titik, foto_titik],
       (error, result) => {
         if (error) {
           return callback(error, null)

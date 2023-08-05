@@ -1,4 +1,20 @@
 const survey_titik_kamera_service = require('../services/survey_titik_kamera_service')
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public') // Ganti dengan path ke direktori penyimpanan foto
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9)
+    const extension = path.extname(file.originalname)
+    cb(null, file.fieldname + '-' + uniqueSuffix + extension)
+  },
+})
+
+// Membuat middleware multer untuk meng-handle foto
+const upload = multer({ storage: storage }).single('foto_titik')
 
 const get_all_surveys_titik_kamera = (req, res) => {
   survey_titik_kamera_service.get_all_surveys_titik_kamera(
@@ -29,7 +45,11 @@ const get_detail_surveys_titik_kamera = (req, res) => {
 }
 
 const create_survey_titik_kamera = (req, res) => {
-  const { id_survey, judul_titik, foto_titik } = req.body
+  const { id_survey, judul_titik } = req.body
+
+  // Dapatkan nama file foto setelah diupload
+  const foto_titik = req.file.filename
+
   survey_titik_kamera_service.create_survey_titik_kamera(
     { id_survey, judul_titik, foto_titik },
     (error, survey_titik_kamera_id) => {
