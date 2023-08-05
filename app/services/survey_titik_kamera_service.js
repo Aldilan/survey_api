@@ -43,7 +43,7 @@ class survey_titik_kamera_service {
     survey_titik_kamera_data,
     callback
   ) {
-    const { judul_titik, foto_titik } = survey_titik_kamera_data
+    const { id_survey, judul_titik, foto_titik } = survey_titik_kamera_data
     db_connection.query(
       'UPDATE `tb_survey_titik_kamera` SET `Judul_Titik` = ?, `Foto_Titik` = ? WHERE `tb_survey_titik_kamera`.`Id_Survey_Titik_Kamera` = ?',
       [judul_titik, foto_titik, survey_titik_kamera_id],
@@ -51,6 +51,7 @@ class survey_titik_kamera_service {
         if (error) {
           return callback(error, null)
         }
+        
         return callback(null, result.affectedRows > 0)
       }
     )

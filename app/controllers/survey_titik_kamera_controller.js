@@ -69,11 +69,14 @@ const create_survey_titik_kamera = (req, res) => {
 }
 
 const update_survey_titik_kamera = (req, res) => {
-  const survey_titik_kamera_id = req.body.survey_titik_kamera_id
-  const { judul_titik, foto_titik } = req.body
+  const id_survey_titik_kamera = req.body.id_survey_titik_kamera
+  const { id_survey, judul_titik } = req.body
+
+  // Dapatkan nama file foto setelah diupload
+  const foto_titik = req.file.filename
   survey_titik_kamera_service.update_survey_titik_kamera(
-    survey_titik_kamera_id,
-    { judul_titik, foto_titik },
+    id_survey_titik_kamera,
+    { id_survey, judul_titik, foto_titik },
     (error, success) => {
       if (error) {
         console.error('Error updating survey titik kamera:', error.message)
@@ -85,7 +88,7 @@ const update_survey_titik_kamera = (req, res) => {
       }
       res
         .status(200)
-        .json({ id: survey_titik_kamera_id, judul_titik, foto_titik })
+        .json({ id: id_survey_titik_kamera, judul_titik, foto_titik })
     }
   )
 }
